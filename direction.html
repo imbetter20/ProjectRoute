@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Place Autocomplete and Directions</title>
+
+   
+    
+{% endblock %}
+
+
+{% block body %}
+<header>
+  <nav class="navbar navbar-dark bg-dark" id="nav-bar">
+        <!-- Navbar content -->
+        <div class="topnav-right">
+          <a class="navbar-brand" href="/"><i class="fa fa-fw fa-home"></i>SafeWalk</a>
+        </div>
+
+        <p><a class="navbar-brand nav-style" href="/testneigh">Chart of neighborhoods </a></p>
+
+        <p><a class="navbar-brand nav-style" href="/direction">Directions</a></p>
+
+        <p><a class="navbar-brand nav-style" href="/neighgeocode">Neighborhood geocode</a></p>
+
+        {% if user != None %}
+
+         <p><a class="navbar-brand nav-style" href="/profile/{{ user.user_id }}">Profile</a></p>
+
+         {% endif %}
+
+         {% if user == "None" %}
+
+
+         <p><a class="navbar-brand nav-style" href="/login"><i class="fa fa-fw fa-user"></i>Login</a></p>
+
+
+         <p><a class="navbar-brand nav-style" href="/signin">Signin</a></p>
+
+         {% endif %}
+
+    </nav>
+  </header>
+    <div class="container">
+        <input id="origin-input" class="controls" type="text"
+            placeholder="Enter an origin location">
+
+        <input id="destination-input" class="controls" type="text"
+            placeholder="Enter a destination location">
+
+        <div id="mode-selector" class="controls">
+          <input type="radio" name="type" id="changemode-walking" checked="checked">
+          <label for="changemode-walking">Walking</label>
+
+<!--           <input type="radio" name="type" id="changemode-transit">
+          <label for="changemode-transit">Transit</label> -->
+
+          <input type="radio" name="type" id="changemode-driving">
+          <label for="changemode-driving">Driving</label>
+        </div>
+        <div id="refresh-section" name="ref" id="id-refresh">
+          <button type="button" class="btn btn-secondary" id="refresh">Refresh</button>
+        </div>
+    </div>
+
+  <!--   <div class=container> -->
+        <div id="map"></div>
+        <!-- <img src="/static/img/green.jpg" id="green" style="display: none"> -->
+        <div>
+             <i class="fas fa-route" id="first" style="display: none">
+             <button type="button" class="btn btn-secondary" id="firstb">
+                The safest route
+             </button>
+             </i>
+             <!-- <img src="/static/img/blue.jpg" id="blue" style="display: none"> -->
+             <i class="fas fa-route" id="second" style="display: none">
+             <button type="button" class="btn btn-secondary" id="secondb">
+                The less safe route
+             </button>
+             </i>
+             <!-- <img src="/static/img/red.jpg" id="red" style="display: none"> -->
+             <i class="fas fa-route" id="third" style="display: none">
+             <button type="button" class="btn btn-secondary" id="thirdb">
+                The worst route 
+             </button>
+             </i>
+        </div>
+        <div>
+                 <button type="button" class="btn btn-secondary" id="addRoute">Add Route</button>
+                 <input id="name-route" type="text" placeholder="Route Nane" >
+                <!-- style="visibility: hidden" -->
+        </div>
+ <!--    </div> -->
+    <script src="/static/js/direction.js"></script>
+   
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS8bnj78vA2fuZ7dBPdNBgHmFuCbvpuus&libraries=places&callback=initMap">
+    </script>
+
+ <!-- {{ api_key }} -->
+
+{% endblock %}
